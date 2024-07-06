@@ -1,0 +1,29 @@
+{
+  "name": "live-translator",
+  "version": "1.0.0",
+  "description": "Cool things",
+  "main": "main.js",
+  "dependencies": {
+    "jimp": "^0.22.12",
+    "screenshot-desktop": "^1.15.0",
+    "tesseract.js": "^5.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Leonardo Louis",
+  "license": "ISC",
+  "build": {
+    "appId": "com.louis.dictionary",
+    "productName": "Dictionary",
+    "directories": {
+      "output": "dist" 
+    },
+    "win": {
+      "target": "nsis" 
+    }
+  }
+}
