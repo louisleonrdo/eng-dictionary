@@ -49,7 +49,7 @@ async function recognizeTextFromDataURL(dataURL) {
 
 async function printClipboardText() {
     const text = clipboard.readText();
-
+    console.log(text)
     if(!text){
         dialog.showErrorBox('Error', 'No text found in clipboard.');
     }else{
@@ -60,7 +60,6 @@ async function printClipboardText() {
 
 async function checkDictionary(word){
     word = clearWhitespaceAndSymbols(word);
-    console.log(word)
     try{
         const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
                 
@@ -70,17 +69,20 @@ async function checkDictionary(word){
     
         const json = await response.json();
         
+        console.log(json)
         if(!dialogWindow) {
             createDialogWindow();
             dialogWindow.webContents.on('did-finish-load', () => {
                 dialogWindow.webContents.send('dictionary-data', json[0]);
             });
         }else {
-            dialogWindow.webContents.send('dictionary-data', json[0]);
-            dialogWindow.show();
+            // dialogWindow.webContents.on('did-finish-load', () => {
+                dialogWindow.webContents.send('dictionary-data', json[0]);
+                dialogWindow.show();
+            // });
         }
     } catch (error) {
-        dialog.showErrorBox('Error', 'Failed to recognize text from image.');
+        dialog.showErrorBox('Error', 'Failed to recognize text.');
     }
 
 
